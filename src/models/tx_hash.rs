@@ -103,7 +103,7 @@ impl serde::Serialize for TxHash {
         S: serde::Serializer,
     {
         // serializer.serialize_str(&hex::encode(&self.0[..]))
-        
+
         let mut hex_str = String::with_capacity(66); // 2 for "0x" + 64 for the hash
         hex_str.push_str("0x");
         hex_str.push_str(&hex::encode(&self.0[..]));
@@ -116,10 +116,12 @@ fn test_read() {
     const TEST_DATA: &str = "0x17cb36e3abfe5cd2894f7b324102c3864d202bc7b85e4f3e5ec78ca2c3db79d7";
     let _hash: TxHash = TEST_DATA.parse().expect("Rejected correct TxHash.");
     //dbg!(_hash);
-    const TEST_DATA_NOPREFIX: &str = "17cb36e3abfe5cd2894f7b324102c3864d202bc7b85e4f3e5ec78ca2c3db79d7";
+    const TEST_DATA_NOPREFIX: &str =
+        "17cb36e3abfe5cd2894f7b324102c3864d202bc7b85e4f3e5ec78ca2c3db79d7";
     <TxHash as std::str::FromStr>::from_str(TEST_DATA_NOPREFIX)
         .expect_err("Accepted TxHash without prefix.");
-    const TEST_DATA_WITH_UPPER: &str = "0x17cb36e3abfe5cd2894f7b324102C3864d202Bc7b85e4f3e5ec78ca2c3db79d7";
+    const TEST_DATA_WITH_UPPER: &str =
+        "0x17cb36e3abfe5cd2894f7b324102C3864d202Bc7b85e4f3e5ec78ca2c3db79d7";
     <TxHash as std::str::FromStr>::from_str(TEST_DATA_WITH_UPPER)
         .expect_err("Accepted TxHash wiTh miXed caSe.");
 }

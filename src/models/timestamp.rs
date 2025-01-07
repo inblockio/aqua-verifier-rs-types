@@ -75,5 +75,9 @@ fn write_time() {
     const TEST_DATA: &str = "20240525000123";
     let timestamp_thing: Timestamp = TEST_DATA.parse().expect("Timestamp was read incorrectly.");
     //dbg!(timestamp_thing);
-    assert_eq!(TEST_DATA,timestamp_thing.to_string(),"Learn to read the time again.")
+    assert_eq!(
+        TEST_DATA,
+        timestamp_thing.to_string(),
+        "Learn to read the time again."
+    )
 }

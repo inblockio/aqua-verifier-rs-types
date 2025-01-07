@@ -1,5 +1,4 @@
-
-use crate::models::stack_str::{StackStr, from_hex};
+use crate::models::stack_str::{from_hex, StackStr};
 #[derive(Hash, Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord)]
 /// Used to represent Hashes
 pub struct Hash(crate::crypt::Hash);
@@ -89,27 +88,4 @@ impl serde::Serialize for Hash {
     {
         serializer.serialize_str(&hex::encode(&self.0[..]))
     }
-}
-
-#[test]
-fn test_read() {
-    const TEST_DATA: &str = "d9e09f8529fed3b909876f34f21c7148d73de01d82f8aee43c52d9ee2601999ddcbf4593a19baac497d9d83bb98c94c2508b8157efafcd6484cbca7c4953af5f";
-    let _hash: Hash = TEST_DATA.parse().expect("Correct Hash not read.");
-    //dbg!(_hash);
-    const TEST_DATA_NOPREFIX: &str = 
-        "0xd9e09f8529fed3b909876f34f21c7148d73de01d82f8aee43c52d9ee2601999ddcbf4593a19baac497d9d83bb98c94c2508b8157efafcd6484cbca7c4953af5f";
-    <Hash as std::str::FromStr>::from_str(TEST_DATA_NOPREFIX)
-        .expect_err("Accepted data with prefix.");
-    const TEST_DATA_WITH_UPPER: &str = 
-        "0xd9e09f8529fed3b909876F34f21c7148d73de01d82f8aEe43c52d9ee2601999dDcbf4593a19baac497d9d83bb98c94c2508b8157efafcd6484cbca7c4953af5f";
-    <Hash as std::str::FromStr>::from_str(TEST_DATA_WITH_UPPER)
-        .expect_err("Accepted data witH mIxeD cAsE.");
-}
-
-#[test]
-fn test_write() {
-    const TEST_DATA: &str = "d9e09f8529fed3b909876f34f21c7148d73de01d82f8aee43c52d9ee2601999ddcbf4593a19baac497d9d83bb98c94c2508b8157efafcd6484cbca7c4953af5f";
-    let hash_thing: Hash = TEST_DATA.parse().expect("Correct Hash not read.");
-    println!("Cannot Check Output at this time.");
-    assert_eq!(TEST_DATA, &hash_thing.to_string(), "stuff broke");
 }

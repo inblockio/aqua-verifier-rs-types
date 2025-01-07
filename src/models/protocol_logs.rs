@@ -1,7 +1,14 @@
-pub enum ProtocolLogsType{
-    ERROR, WARNING, INFO 
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub enum ProtocolLogsType {
+    ERROR,
+    WARNING,
+    INFO,
 }
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ProtocolLogs {
-    log : String,
-    log_type:ProtocolLogsType
+    pub log: String,
+    pub log_type: ProtocolLogsType,
 }
