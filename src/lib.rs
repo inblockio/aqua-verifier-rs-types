@@ -8,6 +8,7 @@ pub mod models {
     pub mod tx_hash;
     pub mod chain;
     pub mod revision;
+    pub mod protocol_logs;
 }
 
 pub mod crypt {
