@@ -3,5 +3,5 @@ pub enum ProtocolLogsType{
 }
 pub struct ProtocolLogs {
     log : String,
-    logType:ProtocolLogsType
+    log_type:ProtocolLogsType
 }
