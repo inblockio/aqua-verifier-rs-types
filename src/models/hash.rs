@@ -1,7 +1,7 @@
 use crate::models::stack_str::{from_hex, StackStr};
 #[derive(Hash, Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord)]
 /// Used to represent Hashes
-pub struct Hash(crate::crypt::Hash);
+pub struct Hash(crate::crypt::Hash512);
 
 impl core::fmt::Debug for Hash {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -33,7 +33,7 @@ impl std::str::FromStr for Hash {
 
 impl From<[u8; 64]> for Hash {
     fn from(value: [u8; 64]) -> Self {
-        crate::crypt::Hash::from(value).into()
+        crate::crypt::Hash512::from(value).into()
     }
 }
 impl std::fmt::Display for Hash {
@@ -48,13 +48,13 @@ impl std::fmt::Display for Hash {
 }
 
 impl std::ops::Deref for Hash {
-    type Target = crate::crypt::Hash;
+    type Target = crate::crypt::Hash512;
     fn deref(&self) -> &Self::Target {
         &self.0
     }
 }
-impl From<crate::crypt::Hash> for Hash {
-    fn from(value: crate::crypt::Hash) -> Self {
+impl From<crate::crypt::Hash512> for Hash {
+    fn from(value: crate::crypt::Hash512) -> Self {
         Self(value)
     }
 }
@@ -64,7 +64,7 @@ impl From<crate::crypt::Hash> for Hash {
 //         Into::<crate::crypt::Hash>::into(value).into()
 //     }
 // }
-impl From<Hash> for crate::crypt::Hash {
+impl From<Hash> for crate::crypt::Hash512 {
     fn from(val: Hash) -> Self {
         val.0
     }
