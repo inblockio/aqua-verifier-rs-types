@@ -12,7 +12,11 @@ pub mod models {
 }
 
 pub mod crypt {
-    pub type Hasher = sha3::Sha3_512;
-    pub type Hash = sha3::digest::Output<Hasher>;
+    pub type Hasher512 = sha3::Sha3_512;
+    pub type Hash512 = sha3::digest::Output<Hasher512>;
+
+    pub type Hasher256 = sha3::Sha3_256;
+    pub type Hash256 = sha3::digest::Output<Hasher256>;
+
     pub use sha3::*;
 }
