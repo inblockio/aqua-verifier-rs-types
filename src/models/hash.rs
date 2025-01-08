@@ -31,8 +31,8 @@ impl std::str::FromStr for Hash {
     }
 }
 
-impl From<[u8; 64]> for Hash {
-    fn from(value: [u8; 64]) -> Self {
+impl From<[u8; 32]> for Hash {
+    fn from(value: [u8; 32]) -> Self {
         crate::crypt::Hash256::from(value).into()
     }
 }
@@ -41,7 +41,7 @@ impl std::fmt::Display for Hash {
         let mut data = [0u8; 64 * 2];
         // Safety: data is exactly the right size for the hex output
         unsafe {
-            hex::encode_to_slice(<[u8; 64]>::from(self.0), &mut data).unwrap_unchecked();
+            hex::encode_to_slice(<[u8; 32]>::from(self.0), &mut data).unwrap_unchecked();
         }
         f.write_str(StackStr::new(data).as_ref())
     }
