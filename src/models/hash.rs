@@ -5,6 +5,7 @@ pub struct Hash(crate::crypt::Hash256);
 
 impl core::fmt::Debug for Hash {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            println!("debug code running ...");
         f.write_str(&self.to_stackstr()[..])
         // f.write_fmt(format_args!("{}..", &self.to_stackstr()[..20]))
     }
@@ -36,14 +37,28 @@ impl From<[u8; 32]> for Hash {
         crate::crypt::Hash256::from(value).into()
     }
 }
+// impl std::fmt::Display for Hash {
+//     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+//         let mut data = [0u8; 64 * 2];
+//         // Safety: data is exactly the right size for the hex output
+//         unsafe {
+//             hex::encode_to_slice(<[u8; 32]>::from(self.0), &mut data).unwrap_unchecked();
+//         }
+//         f.write_str(StackStr::new(data).as_ref())
+//     }
+// }
 impl std::fmt::Display for Hash {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let mut data = [0u8; 64 * 2];
-        // Safety: data is exactly the right size for the hex output
-        unsafe {
-            hex::encode_to_slice(<[u8; 32]>::from(self.0), &mut data).unwrap_unchecked();
-        }
-        f.write_str(StackStr::new(data).as_ref())
+        println!("display code running ...");
+        // Allocate buffer for hex string (32 bytes = 64 hex chars)
+        let mut data = [0u8; 64];
+        // Safely encode the hash to hex
+        hex::encode_to_slice(<[u8; 32]>::from(self.0), &mut data)
+            .map_err(|_| std::fmt::Error)?;
+        
+        // Convert to str safely since we know it's valid hex characters (ASCII)
+        let hex_str = std::str::from_utf8(&data).map_err(|_| std::fmt::Error)?;
+        f.write_str(hex_str)
     }
 }
 
