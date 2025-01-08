@@ -1,4 +1,4 @@
-use crate::models::hash::Hash;
+use crate::{crypt::Hash256, models::hash::Hash};
 use crate::models::timestamp::Timestamp;
 use serde::{Deserialize, Serialize};
 
@@ -10,7 +10,7 @@ pub struct Revision {
     pub domain_id: String,
     pub local_timestamp: Timestamp,
     pub revision_type: String,
-    pub file_hash: String,
+    pub file_hash: Hash,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub link_type: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -41,5 +41,5 @@ pub struct Revision {
     pub witness_sender_account_address: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub witness_merkle_proof: Option<String>,
-    pub leaves: Vec<String>,
+    pub leaves: Vec<Hash>,
 }
