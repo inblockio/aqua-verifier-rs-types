@@ -10,7 +10,8 @@ pub struct Revision {
     pub domain_id: String,
     pub local_timestamp: Timestamp,
     pub revision_type: String,
-    pub file_hash: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub file_hash: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub content: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
