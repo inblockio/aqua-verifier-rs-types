@@ -12,6 +12,8 @@ pub struct Revision {
     pub revision_type: String,
     pub file_hash: String,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub content: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub link_type: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub link_require_indepth_verification: Option<bool>,
