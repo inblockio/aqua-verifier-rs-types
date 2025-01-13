@@ -44,5 +44,6 @@ pub struct Revision {
     pub witness_sender_account_address: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub witness_merkle_proof: Option<String>,
-    pub leaves: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub leaves: Option<Vec<String>>,
 }
