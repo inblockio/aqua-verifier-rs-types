@@ -16,6 +16,12 @@ impl From<Timestamp> for chrono::NaiveDateTime {
     }
 }
 
+impl From<Timestamp> for i64 {
+    fn from(timestamp: Timestamp) -> Self {
+        timestamp.0.timestamp()
+    }
+}
+
 pub fn format_time_stamp(
     timestamp: &chrono::NaiveDateTime,
 ) -> chrono::format::DelayedFormat<chrono::format::StrftimeItems<'static>> {
