@@ -4,6 +4,14 @@ const FORMAT: &str = "%Y%m%d%H%M%S";
 /// Used to check for witness events.
 pub struct Timestamp(chrono::NaiveDateTime);
 
+impl Timestamp {
+    pub fn to_epoch(&self) -> i64 {
+        // self.0.timestamp()
+        self.0.and_utc().timestamp()
+    }
+}
+
+
 impl From<chrono::NaiveDateTime> for Timestamp {
     fn from(value: chrono::NaiveDateTime) -> Self {
         Timestamp(value)
