@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 pub struct Revision {
     pub previous_verification_hash: String,
     pub nonce: String,
-    pub domain_id: String,
+    // pub domain_id: String,
     pub local_timestamp: Timestamp,
     pub revision_type: String,
     #[serde(skip_serializing_if = "Option::is_none")]
