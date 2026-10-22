@@ -20,7 +20,7 @@ exclude = ["target", "*.lock", ".vscode", ".idea"]    # Files or directories to 
 sha3 = "0.10.8"
 ethaddr = { version = "0.2.2", features = ["sha3", "serde"] }
 libsecp256k1 = "0.7.1"
-rustls-webpki = "0.102.4"
+rustls-webpki = "0.103.16"
 flagset = "0.4.5"
 rcgen = "0.13.1"
 rustls = { version = "0.23.8", default-features = false, features = ["ring", "std"] }
